@@ -1,0 +1,29 @@
+<!-- Include this to send the form email without having to refresh the page -->
+<!-- Change the variable names to fit the id value of your form inputs -->
+<script>
+function sendEmail(){
+	var email = document.getElementById('email').value;
+	var name = document.getElementById('name').value;
+	var message = document.getElementById('message').value;
+$.ajax({
+    url: 'contactForm.php',
+    type: 'post',
+    data: {"email":email,"name":name,"message":message},
+    success: function(response) {
+    		document.getElementById('email').value = "";
+    		document.getElementById('name').value = "";
+    		document.getElementById('message').value = "";
+
+    		alert("Your message has been sent!") }
+});	
+}
+
+</script>
+
+<!-- Example form -->
+<form  method="post" name="contactForm" id="contactForm" action="javascript:sendEmail();">
+<input name="name" id="name" placeholder="Name" type="text" class="text" />
+<input name="email" id="email" placeholder="Email" type="text" class="text" />
+<textarea name="message" id="message" placeholder="Message"></textarea>
+<input type="submit"  name="submit" value="Send Message" class="button button-icon fa fa-envelope">
+</form>
